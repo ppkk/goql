@@ -1,15 +1,21 @@
 default: all	
 
-all: c-main
+all: tests/greek
 	
-greek.o: greek.h greek.cc
-	g++ -c -o greek.o greek.cc 
+src/greek.o: include/greek.hxx src/greek.cc
+	g++ -c -Iinclude -o src/greek.o src/greek.cc
 
-main.o: greek.h main.cc
-	g++ -c -o main.o main.cc 
+lib/libgreek.a: src/greek.o
+	ar rcs lib/libgreek.a src/greek.o
+
+tests/main.o: include/greek.hxx tests/main.cc
+	g++ -c -o tests/main.o tests/main.cc -Iinclude
+
+tests/greek: lib/libgreek.a tests/main.o
+	g++ -o tests/greek tests/main.o -Llib -lgreek
 
 c-main: greek.o main.o
 	g++ -o c-main greek.o main.o -lQuantLib
 
 clean:
-	rm *.o c-main
+	rm -f *.o src/*.o lib/* goql

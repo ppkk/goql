@@ -1,12 +1,12 @@
 #include <iostream>
 #include <ql/quantlib.hpp>
 
-#include "greek.h"
+#include "greek.hxx"
 
 using namespace QuantLib;
 
 
-int main() 
+int c_main() 
 {
     Real strike = 110.0;
     Real timeToMaturity = .5; //years
@@ -52,5 +52,7 @@ int main()
 
     //estimate new price of call given one point change in volatility using vega
     std::cout << "Value of 110.0 call (sigma up " << changeInSigma << ") estimated from vega is " << value + vega << std::endl;
+
+    return 0;
 }
 
