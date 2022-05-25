@@ -1,6 +1,6 @@
 default: all	
 
-all: tests/greek
+all: tests/greek goql
 	
 src/greek.o: include/greek.hxx src/greek.cc
 	g++ -c -Iinclude -o src/greek.o src/greek.cc
@@ -12,10 +12,10 @@ tests/main.o: include/greek.hxx tests/main.cc
 	g++ -c -o tests/main.o tests/main.cc -Iinclude
 
 tests/greek: lib/libgreek.a tests/main.o
-	g++ -o tests/greek tests/main.o -Llib -lgreek
+	g++ -o tests/greek tests/main.o -Llib -lgreek -lQuantLib
 
-c-main: greek.o main.o
-	g++ -o c-main greek.o main.o -lQuantLib
+goql: lib/libgreek.a greek.go
+	go build -v
 
 clean:
-	rm -f *.o src/*.o lib/* goql
+	rm -f *.o src/*.o tests/*.o lib/* goql tests/greek

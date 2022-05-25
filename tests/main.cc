@@ -6,7 +6,7 @@
 using namespace QuantLib;
 
 
-int c_main() 
+int main() 
 {
     Real strike = 110.0;
     Real timeToMaturity = .5; //years
@@ -18,7 +18,7 @@ int c_main()
 
     // TODO introduce structs
     double value, delta, gamma, vega, theta;
-    greeks(strike, timeToMaturity, spot, riskFree, dividendYield, sigma, &value, &delta, &gamma, &vega, &theta);
+    CalcGreeks(strike, timeToMaturity, spot, riskFree, dividendYield, sigma, &value, &delta, &gamma, &vega, &theta);
 
     std::cout << "Value of 110.0 call is " << value << std::endl;
     std::cout << "Delta of 110.0 call is " << delta << std::endl;
