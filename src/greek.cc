@@ -5,12 +5,6 @@
 
 using namespace QuantLib; 
 
-double Test(double a)
-{
-    return 2*a;
-}
-
-
 void CalcGreeks(double strike, double timeToMaturityYears, double spot, double riskFree, double dividendYield, double sigma,
             double *value, double *delta, double *gamma, double *vega, double *theta)
 {

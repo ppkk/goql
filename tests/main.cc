@@ -15,16 +15,15 @@ int main()
     Rate dividendYield = 0.0;
     Volatility sigma = .20;
 
-
     // TODO introduce structs
     double value, delta, gamma, vega, theta;
     CalcGreeks(strike, timeToMaturity, spot, riskFree, dividendYield, sigma, &value, &delta, &gamma, &vega, &theta);
 
-    std::cout << "Value of 110.0 call is " << value << std::endl;
-    std::cout << "Delta of 110.0 call is " << delta << std::endl;
-    std::cout << "Gamma of 110.0 call is " << gamma << std::endl;
-    std::cout << "Vega of 110.0 call is "  << vega << std::endl;
-    std::cout << "Theta of 110.0 call is " << theta << std::endl;
+    std::cout << "Value of " << strike << " call is " << value << std::endl;
+    std::cout << "Delta of " << strike << " call is " << delta << std::endl;
+    std::cout << "Gamma of " << strike << " call is " << gamma << std::endl;
+    std::cout << "Vega of " << strike << " call is "  << vega << std::endl;
+    std::cout << "Theta of " << strike << " call is " << theta << std::endl << std::endl;
 
     // TODO use function to up as well
 
@@ -39,19 +38,19 @@ int main()
 
     Real changeInSpot = 1.0;
     BlackScholesCalculator bsCalculatorSpotUpOneDollar(Option::Type::Call, strike, spot + changeInSpot, growth, vol, discount);
-    std::cout << "Value of 110.0 call (spot up $" << changeInSpot << ") is " <<  bsCalculatorSpotUpOneDollar.value() << std::endl;
-    std::cout << "Value of 110.0 call (spot up $" << changeInSpot << ") estimated from delta is " <<  (value + delta * changeInSpot) << std::endl;
+    std::cout << "Value of " << strike << " call (spot up $" << changeInSpot << ") is " <<  bsCalculatorSpotUpOneDollar.value() << std::endl;
+    std::cout << "Value of " << strike << " call (spot up $" << changeInSpot << ") estimated from delta is " <<  (value + delta * changeInSpot) << std::endl;
 
     //use a Taylor series expansion to estimate the new price of a call given delta and gamma
-    std::cout << "Value of 110.0 call (spot up $" << changeInSpot << ") estimated from delta and gamma is " << (value + (delta * changeInSpot) + (.5 * gamma * changeInSpot)) << std::endl;
+    std::cout << "Value of " << strike << " call (spot up $" << changeInSpot << ") estimated from delta and gamma is " << (value + (delta * changeInSpot) + (.5 * gamma * changeInSpot)) << std::endl;
 
     //calculate new price of a call given a one point change in volatility
     Real changeInSigma = .01;
     BlackScholesCalculator bsCalculatorSigmaUpOnePoint(Option::Type::Call, strike, spot, growth, (sigma + changeInSigma) * std::sqrt(timeToMaturity) , discount);
-    std::cout << "Value of 110.0 call (sigma up " << changeInSigma << ") is " << bsCalculatorSigmaUpOnePoint.value() << std::endl;
+    std::cout << "Value of " << strike << " call (sigma up " << changeInSigma << ") is " << bsCalculatorSigmaUpOnePoint.value() << std::endl;
 
     //estimate new price of call given one point change in volatility using vega
-    std::cout << "Value of 110.0 call (sigma up " << changeInSigma << ") estimated from vega is " << value + vega << std::endl;
+    std::cout << "Value of " << strike << " call (sigma up " << changeInSigma << ") estimated from vega is " << value + vega << std::endl;
 
     return 0;
 }
